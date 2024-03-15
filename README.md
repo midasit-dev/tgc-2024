@@ -1,2 +1,3 @@
-# tgc_2024
+# tgc-2024
 plugin development technical growth club repository
+
