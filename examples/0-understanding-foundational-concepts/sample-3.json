@@ -1,0 +1,9 @@
+{
+  "name": "kim",
+  "age": 20,
+  "hasBabies": true,
+  "babyNames": [
+    "kim-a",
+    "kim-b"
+  ]
+}

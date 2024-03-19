@@ -1,0 +1,17 @@
+[
+  {
+    "name": "kim",
+    "age": 20,
+    "hasBabies": true,
+    "babyNames": [
+      "kim-a",
+      "kim-b"
+    ]
+  },
+  {
+    "name": "lee",
+    "age": 35,
+    "hasBabies": false,
+    "babyNames": null
+  }
+]
