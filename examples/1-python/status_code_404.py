@@ -2,7 +2,7 @@ import requests
 
 base_url = 'https://httpbin.org'
 endpoint = '/status'
-url_path = '/500' # 인증 필요 상태 코드
+url_path = '/404' # 리소스를 찾을 수 없는 상태 코드
 request_url = base_url + endpoint + url_path
 
 response = requests.get(request_url)
@@ -14,7 +14,5 @@ elif response.status_code == 403:
 	print('Forbidden. Access denied.')
 elif response.status_code == 404:
 	print('Resource not found.')
-elif response.status_code == 500:
-	print('Internal server error.')
 else:
 	print(f'Error: {response.status_code}')

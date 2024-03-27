@@ -2,7 +2,7 @@ import requests
 
 base_url = 'https://httpbin.org'
 endpoint = '/status'
-url_path = '/500' # 인증 필요 상태 코드
+url_path = '/500' # 서버 오류
 request_url = base_url + endpoint + url_path
 
 response = requests.get(request_url)
