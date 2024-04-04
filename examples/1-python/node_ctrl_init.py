@@ -38,7 +38,7 @@ def print_user_information():
 # get 동작을 정의 합니다.
 def process_get():
 	print('Node 정보를 가져옵니다.')
-	# Question: 이 주석 아래에 GET 요청을 작성하세요.
+	# BUG: 이 주석 아래에 GET 요청을 작성하세요.
 	# GET 요청 (url, headers 포함)
 	# util에 있는 print_json_table 함수 이용
 	pass
@@ -56,7 +56,7 @@ def process_post():
 		print('입력된 값이 잘못 되었습니다.')
 		pass
 	else:
-		# Question: 이 주석 아래에 POST 요청을 작성하세요.
+		# BUG: 이 주석 아래에 POST 요청을 작성하세요.
 		# POST 요청 (url, headers, body 포함)
 		# body 생성에 대한 설명
 			# body 형태: { 'Assign': { 'ID': { 'X': X, 'Y': Y, 'Z': Z } } }
@@ -79,7 +79,7 @@ def process_put():
 	if len(body_arr) < 4:
 		print('입력된 값이 잘못 되었습니다.')
 	else:
-		# Question: 이 주석 아래에 PUT 요청을 작성하세요.
+		# BUG: 이 주석 아래에 PUT 요청을 작성하세요.
 		# PUT 요청 (url, headers, body 포함)
 		# body 생성에 대한 설명은 POST와 동일
 		pass
@@ -90,7 +90,7 @@ def process_delete():
 	process_get()
 	StringSupport.enter()
 	
-	# Question: 이 주석 아래에 DELETE 요청을 작성하세요.
+	# BUG: 이 주석 아래에 DELETE 요청을 작성하세요.
 	# DELETE 요청 (url, headers 포함)
 	# 삭제할 Node ID를 입력 받아 특정 Node 정보를 삭제합니다
 	pass
