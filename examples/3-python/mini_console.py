@@ -41,8 +41,13 @@ def main():
 
 		# 사용자의 입력을 받습니다.
 		selected = input('숫자를 입력하세요:')
-		selected_name = dict_index_name[selected]
+		selected_name = ''
+		
+		# selected가 dictionary key 범위 안에 있는지 검사를 합니다.
+		if selected in dict_index_name.keys():
+			selected_name = dict_index_name[selected]
 		print('선택된 값 :', selected_name)
+		
 		# POST (생성할 절점에 대한 정보 필요)
 		if selected_name == 'POST':
 			id = int(input('id:'))
