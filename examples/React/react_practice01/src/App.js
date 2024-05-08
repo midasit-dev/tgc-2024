@@ -1,29 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
-import { useEffect, useState } from "react";
-import Todos from './components/Todos'
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Todos from "./components/Todos";
+import { Button } from "@midasit-dev/moaui";
 
 function App() {
+  const [name, setName] = React.useState("lhy0118");
 
-  const [name, setName] = useState("lhy0118");
+  React.useEffect(() => {
+    console.log("use effect");
+    return () => {
+      console.log("cleanup");
+    };
+  }, [name]);
 
-  useEffect(()=>{
-    console.log('use effect')
-    return ()=>{
-      console.log('cleanup')
-    }
-  }, [name])
+  function onClickName(event) {
+    console.log(event.target.className);
+    console.log("clicked name:", name);
+  }
+
+  const onClickName2 = (event) => {
+    console.log(event.target.className);
+    console.log("clicked name:", name);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <div id="div_text">
           Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p onClick={()=>setName("TGC")}>
+        </div>
+        <div className="div_name" onClick={onClickName}>
           {name}
-        </p>
+        </div>
         {/* <Todos/> */}
         <a
           className="App-link"
