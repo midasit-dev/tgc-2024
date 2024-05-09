@@ -27,8 +27,9 @@ function Todos() {
         Add Todo list
       </Button>
       <div>
-        <p>Completed: {completedCount}</p>
-        <p>Not Completed: {notCompletedCount}</p>
+        <p>총 개수: {completedCount + notCompletedCount}</p>
+        <p>완료 개수: {completedCount}</p>
+        <p>미완료 개수: {notCompletedCount}</p>
       </div>
       <ul>
         {
