@@ -8,7 +8,7 @@ function Todos() {
   const [counter, setCounter] = useState(1);
   // api 호출을 통해 받아온 데이터를 todos라는 이름으로 사용합니다. (내부에서 useState, useEffect 사용됨)
   const todos = useTodos(counter);
-   // completed가 true인 todos와 false인 todos의 개수를 계산합니다.
+   // completed가 true인 todos와 false인 todos의 개수를 계산합니다!
    const countAll = todos.length;
    const completedCount_true = todos.filter(todo => todo.completed).length;
    const completedCount_false = countAll - completedCount_true;
