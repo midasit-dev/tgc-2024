@@ -38,7 +38,7 @@ function App() {
         <div className="div_name" onClick={onClickName}>
           {name}
         </div>
-        <div id="spare_count"> {count} </div>
+        
         <Todos/>
       </header>
     </div>

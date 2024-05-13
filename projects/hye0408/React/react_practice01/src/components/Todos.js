@@ -19,6 +19,7 @@ function Todos() {
   return (
     <div className="Todos">
       <p>버튼이 {count} 번 클릭되었습니다.</p>
+      <p>남은 횟수는 {149-count}번 입니다.</p>
       <Button
         variant="contained"
         width="auto"
