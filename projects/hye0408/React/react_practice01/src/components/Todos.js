@@ -7,7 +7,7 @@ import { Button } from "@midasit-dev/moaui";
 function Todos() {
   const [counter, setCounter] = useState(1);
   // api 호출을 통해 받아온 데이터를 todos라는 이름으로 사용합니다. (내부에서 useState, useEffect 사용됨)
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const todos = useTodos(counter);
  
 
@@ -18,8 +18,8 @@ function Todos() {
   
   return (
     <div className="Todos">
-      <p>버튼이 {count} 번 클릭되었습니다.</p>
-      <p>남은 횟수는 {149-count}번 입니다.</p>
+      <p>총 150개 중, {count}개 완료 되었습니다.</p>
+      <p>남은 횟수는 {150-count}번 입니다.</p>
       <Button
         variant="contained"
         width="auto"
