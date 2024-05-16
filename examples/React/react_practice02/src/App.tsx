@@ -30,7 +30,7 @@ const totaldataSet = {
   cord: [],
 };
 
-const App = () => {
+export default function App (){
   const [rowDatas, setRowDatas] = React.useState(initRows);
 
   function onClickCalculate() {
@@ -158,6 +158,4 @@ const App = () => {
       </GuideBox>
     </GuideBox>
   );
-};
-
-export default App;
+}
