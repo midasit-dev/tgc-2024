@@ -16,6 +16,9 @@ import { GuideBox, Panel, DataGrid, Button } from "@midasit-dev/moaui";
 import PreviewShape from "./Component/PreviewShape";
 import MDReport from "./Component/MarkdownView";
 
+//pyscript
+import { test } from "./utils_pyscript";
+
 const initRows = [
   { id: 1, x: 10, y: 10 },
   { id: 2, x: 300, y: 10 },
@@ -37,6 +40,8 @@ const App = () => {
       cord: rowDatas.map((row) => [row.x, row.y]),
     };
     console.log("cord", cord); // cord 변수를 python에 넘겨줄 예정.
+    // const test_text = test();
+    // console.log("test_text", test_text);
   }
 
   function onClickAdd() {

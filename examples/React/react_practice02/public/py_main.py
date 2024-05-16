@@ -5,4 +5,5 @@ from py_base_sub import HelloWorld, ApiGet
 ### do not delete this import scripts ###
 
 def main():
-	print('write here ...')
+	temp_text = "# TEST\n ## TEST2"
+	return json.dumps(temp_text)

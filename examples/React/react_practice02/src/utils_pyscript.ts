@@ -158,3 +158,11 @@ export function dbDelete(itemName: string, item_id: string | number) {
 		return JSON.parse(result);
 	});
 }
+
+export function test() {
+	return checkPyScriptReady(() => {
+		const py_main_func = pyscript.interpreter.globals.get('main');
+		const result = py_main_func();
+		return JSON.parse(result);
+	});
+}
