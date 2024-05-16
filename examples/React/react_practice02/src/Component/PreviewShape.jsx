@@ -79,7 +79,7 @@ const Graph = ({ points = [] }) => {
 
 // 사용 예시
 export default function PreViewShape(props) {
-  const { rowdata } = props;
+  const { rowdata = [] } = props;
 
   // 삼각형의 좌표 예시입니다. 추가 좌표를 받아 다각형을 그릴 수 있습니다.
   const points = [

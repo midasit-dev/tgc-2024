@@ -62,10 +62,9 @@ const App = () => {
           alignItems={"center"}
           padding={0}
         >
-          <PreviewShape rowdata={rowDatas} />
+          <PreviewShape />
         </Panel>
         <Panel marginTop={2} marginBottom={2} width={300} height={300}>
-          {/* <TestView /> */}
           <GuideBox
             height={240}
             width={280}
@@ -134,12 +133,12 @@ const App = () => {
             </Button>
           </GuideBox>
         </Panel>
-        <Button onClick={onClickCalculate} variant="contained" width="100%">
+        <Button width="100%" variant="contained" onClick={onClickCalculate}>
           Calculate
         </Button>
       </GuideBox>
       <GuideBox>
-        <Panel width={300} height={660} padding={1} >
+        <Panel width={300} height={660} padding={1}>
 					<GuideBox center>
 						<div
 							style={{
