@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 // Point to string 변환 (예: "10,10 290,150 10,290")
 
-const Graph = ({ points = [] }) => {
+const Graph = ({ key, points = [] }) => {
   const [scaledPoints, setScaledPoints] = useState([""]);
 
   const pointsToString = (pointsValue) => {
@@ -44,7 +44,7 @@ const Graph = ({ points = [] }) => {
   }, [points]);
 
   return (
-    <div key={"div_Graph"}>
+    <div key={`div_${key}`}>
       <svg width="300" height="300" viewBox="0 0 300 300">
         <polygon
           points={pointsToString(scaledPoints)}
@@ -84,10 +84,10 @@ export default function PreViewShape(props) {
   // 삼각형의 좌표 예시입니다. 추가 좌표를 받아 다각형을 그릴 수 있습니다.
   const points = [
     { id: 1, x: 10, y: 10 },
-    { id: 2, x: 600, y: 10 },
-    { id: 3, x: 250, y: 800 },
-    { id: 4, x: 10, y: 250 },
+    { id: 2, x: 300, y: 10 },
+    { id: 3, x: 300, y: 300 },
+    { id: 4, x: 10, y: 300 },
   ];
 
-  return <div>{rowdata && <Graph key={"Graph"} points={rowdata} />}</div>;
+  return <div>{rowdata.length > 0 && <Graph key={"Graph"} />}</div>;
 }

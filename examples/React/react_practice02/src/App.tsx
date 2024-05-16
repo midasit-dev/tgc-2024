@@ -40,14 +40,12 @@ const App = () => {
   }
 
   function onClickAdd() {
-    const newId = rowDatas[rowDatas.length - 1].id + 1;
-    setRowDatas([...rowDatas, { id: newId, x: 0, y: 0 }]);
+    // add new row (use setRowDatas function)
   }
 
   function onClickDelete() {
-    if (rowDatas.length === 0) return;
-    const lastId = rowDatas[rowDatas.length - 1].id;
-    setRowDatas(rowDatas.filter((row) => row.id !== lastId));
+    // delete selected row (use setRowDatas function)
+    // consider rowDatas.length > 0
   }
 
   return (

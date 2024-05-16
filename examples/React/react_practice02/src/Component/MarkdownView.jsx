@@ -4,7 +4,6 @@ import ReactMarkdown from 'react-markdown';
 import 'katex/dist/katex.min.css'
 import { GuideBox } from '@midasit-dev/moaui';
 
-
 const test = `*MEMBER NAME : BP1*
 ===================
 
@@ -119,7 +118,6 @@ $L_{req} = L_{h1} + L_{h2}$ = None mm
 $L_{req} / L_{anc}$ = 17.2593627013222 `
 
 export default function MDReport({ mdData = "" }) {
-	const TEST = `# TEST\n ## Test`
   return(
 		<GuideBox>
 			<ReactMarkdown
