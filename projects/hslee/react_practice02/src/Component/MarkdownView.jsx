@@ -124,8 +124,9 @@ export default function MDReport({ mdData = "" }) {
 				remarkPlugins={[remarkMath]}
 				rehypePlugins={[rehypeKatex]}
 			>
-				{test}
+				{mdData}
 			</ReactMarkdown>
+			
 			<style>
 				{`
 					h1 {

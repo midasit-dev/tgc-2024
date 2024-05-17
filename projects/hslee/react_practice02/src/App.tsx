@@ -46,11 +46,16 @@ export default function App (){
 
   function onClickAdd() {
     // add new row (use setRowDatas function)
+    const newId = rowDatas.length + 1;
+    setRowDatas([...rowDatas, { id: newId, x:0,y:0}]);    
   }
 
   function onClickDelete() {
     // delete selected row (use setRowDatas function)
     // consider rowDatas.length > 0
+    if(rowDatas.length > 0) {
+      setRowDatas(rowDatas.slice(0, rowDatas.length - 1));
+    }    
   }
 
   return (
@@ -65,7 +70,7 @@ export default function App (){
           alignItems={"center"}
           padding={0}
         >
-          <PreviewShape />
+          <PreviewShape rowdata = {rowDatas}/> 
         </Panel>
         <Panel marginTop={2} marginBottom={2} width={300} height={300}>
           <GuideBox
@@ -109,6 +114,7 @@ export default function App (){
               hideFooterPagination
               hideFooterSelectedRowCount
               processRowUpdate={(newValue: any) => {
+                console.log("newValue", newValue);
                 setRowDatas(
                   rowDatas.map((row) =>
                     row.id === newValue.id
@@ -151,7 +157,7 @@ export default function App (){
 								fontSize: 12,
 							}}
 						>
-							<MDReport />
+							<MDReport mdData={"# TEST\n ## TEST"}/>
 						</div>
 					</GuideBox>
         </Panel>

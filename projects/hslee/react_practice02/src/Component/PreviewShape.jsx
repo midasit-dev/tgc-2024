@@ -89,5 +89,5 @@ export default function PreViewShape(props) {
     { id: 4, x: 10, y: 300 },
   ];
 
-  return <div>{rowdata.length > 0 && <Graph key={"Graph"} />}</div>;
+  return <div>{rowdata.length > 0 && <Graph key={"Graph"} points = {rowdata}/>}</div>;
 }
