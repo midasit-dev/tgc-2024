@@ -5,7 +5,7 @@ import Todos from "./components/Todos";
 import { Button } from "@midasit-dev/moaui";
 
 function App() {
-  const [name, setName] = React.useState("hslee");
+  const [name, setName] = React.useState("hjm0830");
 
   React.useEffect(() => {
     console.log("use effect");
@@ -15,7 +15,7 @@ function App() {
   }, [name]);
 
   function onClickName(event) {
-    setName(name === "hslee" ? "TGC" : "hslee");
+    setName(name === "hjm0830" ? "TGC" : "hjm0830");
   }
 
   const onClickName2 = (event) => {
