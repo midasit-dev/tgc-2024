@@ -157,7 +157,7 @@ export default function App (){
 								fontSize: 12,
 							}}
 						>
-							<MDReport />
+							<MDReport mdData={"# TEST"}/>
 						</div>
 					</GuideBox>
         </Panel>
