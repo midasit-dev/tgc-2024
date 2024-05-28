@@ -1,0 +1,14 @@
+{
+	"packages": [
+		"numpy",
+		"mapieng"
+	],
+	"fetch": [
+		{
+			"files": [
+				"./py_base_sub.py",
+				"./py_base.py"
+			]
+		}
+	]
+}
