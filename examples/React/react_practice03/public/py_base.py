@@ -259,8 +259,10 @@ def get_subitem_next_id(subitem_list):
     return max(map(lambda x: x['ID'], subitem_list['ITEMS'])) + 1
 
 def section_property(json_data):
-    url = "https://moa.rpm.kr-dv-midasit.com/backend/function-executor/python-execute/base.section_property/mdreport"
-    headers = {
-        "Content-Type": "application/json"
-    }
-    return requests_json.post(url, headers=headers, jsonObj={'arguments': json_data})
+    # url = "https://moa.rpm.kr-dv-midasit.com/backend/function-executor/python-execute/base.section_property/mdreport"
+    # headers = {
+    #     "Content-Type": "application/json"
+    # }
+    # return requests_json.post(url, headers=headers, jsonObj={'arguments': json_data})
+    response = {'message': '\nsection properties\n==================\n  \n$Perimeter$ = 1160.00 mm  \n$Area$ = 84100.00 $mm^2$  \n$Cx$ = 155.00 mm  \n$Cy$ = 155.00 mm  \n$Ix$ = 589400833.33 $mm^4$  \n$Iy$ = 589400833.33 $mm^4$\n'}
+    return response

@@ -1,7 +1,6 @@
 {
 	"packages": [
-		"numpy",
-		"mapieng"
+		"numpy"
 	],
 	"fetch": [
 		{

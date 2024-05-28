@@ -17,7 +17,7 @@ import PreviewShape from "./Component/PreviewShape";
 import MDReport from "./Component/MarkdownView";
 
 //pyscript
-import { calculate_sect_prop } from "./utils_pyscript";
+
 
 const initRows = [
   { id: 1, x: 10, y: 10 },
@@ -39,9 +39,7 @@ export default function App (){
       ...totaldataSet,
       "vertices": rowDatas.map((row) => [row.x, row.y]),
     };
-    const test_text = calculate_sect_prop(vertices);
-    console.log("test_text", test_text);
-    setResult(test_text.message);
+    console.log("vertices", vertices);
   }
 
   function onClickAdd() {

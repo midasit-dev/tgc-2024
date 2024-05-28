@@ -158,15 +158,3 @@ export function dbDelete(itemName: string, item_id: string | number) {
 		return JSON.parse(result);
 	});
 }
-
-export function calculate_sect_prop(vertices:any) {
-	const test = {'message': '\nsection properties\n==================\n  \n$Perimeter$ = 1160.00 mm  \n$Area$ = 84100.00 $mm^2$  \n$Cx$ = 155.00 mm  \n$Cy$ = 155.00 mm  \n$Ix$ = 589400833.33 $mm^4$  \n$Iy$ = 589400833.33 $mm^4$\n'}
-	return checkPyScriptReady(() => {
-		// console.log("vertices: ", JSON.stringify(vertices));
-		const py_main_func = pyscript.interpreter.globals.get('main');
-		const result = py_main_func(JSON.stringify(vertices));
-		console.log("type result", typeof result);
-		return JSON.parse(result);
-	});
-
-}
