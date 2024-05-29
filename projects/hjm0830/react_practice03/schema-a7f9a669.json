@@ -1,0 +1,148 @@
+{
+  "canvas": {
+    "width": 500,
+    "height": 600
+  },
+  "layers": [
+    {
+      "id": "1-FloatingBox-61692d56-8bc01787",
+      "type": "FloatingBox",
+      "props": {
+        "x": 0,
+        "y": 0,
+        "width": 328,
+        "height": 328,
+        "guideBoxProps": {
+          "width": "inherit",
+          "height": "inherit",
+          "center": true,
+          "spacing": 2
+        }
+      },
+      "children": [
+        {
+          "id": "1-TextField-30b88a44-8bc01787",
+          "type": "TextField",
+          "props": {
+            "id": "text-1",
+            "autoFocus": false,
+            "type": "text",
+            "placeholder": "Placeholder",
+            "title": "입력값1",
+            "titlePosition": "left",
+            "error": false,
+            "disabled": false,
+            "wrappedWidth": "150px",
+            "width": "100px",
+            "height": "30px",
+            "spacing": 1,
+            "textAlign": "left",
+            "multiline": false,
+            "rows": 1,
+            "maxRows": 1
+          },
+          "children": []
+        },
+        {
+          "id": "2-TextField-923c7606-8bc01787",
+          "type": "TextField",
+          "props": {
+            "id": "text-2",
+            "autoFocus": false,
+            "type": "text",
+            "placeholder": "Placeholder",
+            "title": "INPUT 2",
+            "titlePosition": "left",
+            "error": false,
+            "disabled": false,
+            "wrappedWidth": "200",
+            "width": "100px",
+            "height": "30px",
+            "spacing": 1,
+            "textAlign": "left",
+            "multiline": false,
+            "rows": 1,
+            "maxRows": 1
+          },
+          "children": []
+        }
+      ],
+      "parent": null
+    },
+    {
+      "id": "2-FloatingBox-98c48af7-8bc01787",
+      "type": "FloatingBox",
+      "props": {
+        "x": 0,
+        "y": 328,
+        "width": 328,
+        "height": 224,
+        "guideBoxProps": {
+          "width": "inherit",
+          "height": "inherit",
+          "center": true
+        }
+      },
+      "children": [
+        {
+          "id": "1-Button-b2016999-8bc01787",
+          "type": "Button",
+          "props": {
+            "id": "button-1",
+            "children": "나는 버튼이다",
+            "disabled": false,
+            "width": "150",
+            "loading": false,
+            "variant": "contained",
+            "color": "negative"
+          },
+          "children": []
+        }
+      ],
+      "parent": null
+    },
+    {
+      "id": "3-FloatingBox-c37acef5-8bc01787",
+      "type": "FloatingBox",
+      "props": {
+        "x": 328,
+        "y": 0,
+        "width": 168,
+        "height": 552,
+        "guideBoxProps": {
+          "width": "inherit",
+          "height": "inherit"
+        }
+      },
+      "children": [
+        {
+          "id": "1-Chip-6aa1a23d-8bc01787",
+          "type": "Chip",
+          "props": {
+            "id": "cp-1",
+            "bgColor": "",
+            "color": "",
+            "label": "이건 설명이야",
+            "disabled": false,
+            "severity": "success",
+            "size": "small"
+          },
+          "children": []
+        }
+      ],
+      "parent": null
+    }
+  ],
+  "python": {
+    "rawCode": "",
+    "pySchema": {
+      "schema": {
+        "name": "",
+        "parameters": {},
+        "description": ""
+      },
+      "topK": 0
+    },
+    "argumentComponent": {}
+  }
+}
