@@ -166,3 +166,12 @@ export function getGRUPlist(){
 		return JSON.parse(result);
 	});
 }
+
+export function getELEMlist(E_LIST:any){
+	return checkPyScriptReady(() => {
+		const py_get_ELEM_list = pyscript.interpreter.globals.get('py_get_ELEM_list');
+		console.log('E_LIST', E_LIST)
+		const result = py_get_ELEM_list(E_LIST);
+		return JSON.parse(result);
+	});
+}

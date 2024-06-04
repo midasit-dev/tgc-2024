@@ -151,27 +151,23 @@ function View(){
       }
       Layer_Array.push(Layer_i)
     }
-
     setGroundLevel_Line(GroundLevel_Array)
     setLayer_Line(Layer_Array)
     setWater_Line(WaterLevel_Array)
 
     const GroundLevel_YArray = []
-    for(let i = 0; i<GroundLevel_Line.length; i++){
-      GroundLevel_YArray.push(GroundLevel_Line[i][1])
+    for(let i = 0; i<GroundLevel_Array.length; i++){
+      GroundLevel_YArray.push(GroundLevel_Array[i][1])
     }
     const YMax = Math.max(...GroundLevel_YArray)
-
     const Layer_YArray = []
-    for(let i = 0; i<Layer_Line.length; i++){
-      for(let j = 0; j<Layer_Line[i].length; j++){
-        Layer_YArray.push(Layer_Line[i][j][1])
+    for(let i = 0; i<Layer_Array.length; i++){
+      for(let j = 0; j<Layer_Array[i].length; j++){
+        Layer_YArray.push(Layer_Array[i][j][1])
       }
-    }
-
-    const XPos_Array = []
-    for(let i = 0; i<GroundLevel_Line.length; i++){
-      XPos_Array.push(GroundLevel_Line[i][0])
+    }    const XPos_Array = []
+    for(let i = 0; i<GroundLevel_Array.length; i++){
+      XPos_Array.push(GroundLevel_Array[i][0])
     }
     const XMax = Math.max(...XPos_Array)
     const XMin = Math.min(...XPos_Array)
