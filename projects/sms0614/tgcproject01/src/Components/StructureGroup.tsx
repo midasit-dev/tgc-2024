@@ -20,6 +20,10 @@ function StructureGroup(){
   const [STGroupList, setSTGroupList] = useRecoilState(STGroups);
   useEffect(() => {
     const GroupList = getGRUPlist()
+    if (GroupList.hasOwnProperty('error')) {
+      alert('Error in getting Group List')
+      return
+    }
     setSTGroupList(GroupList.map((item:any) => {
       return {
         name : item,
@@ -36,6 +40,10 @@ function StructureGroup(){
 
   const handleGRUPrefresh = () => {
     const GroupList = getGRUPlist()
+    if (GroupList.hasOwnProperty('error')) {
+      alert('Error in getting Group List')
+      return
+    }
     setSTGroupList(GroupList.map((item:any) => {
       return {
         name : item,

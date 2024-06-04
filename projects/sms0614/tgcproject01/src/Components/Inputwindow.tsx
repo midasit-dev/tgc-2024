@@ -15,15 +15,10 @@ import LayerTable from './LayerTable';
 import StructureGroup from './StructureGroup';
 function Inputwindow(){
 
-  
-
-  
   const SoilPTypeList = [
     ['Rankine', 0],
     ['Coulomb', 1],
   ]
-
-
 
   return(
     <GuideBox width={550} spacing={1}>
