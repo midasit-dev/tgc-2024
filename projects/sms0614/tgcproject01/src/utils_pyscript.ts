@@ -167,10 +167,11 @@ export function getGRUPlist(){
 	});
 }
 
-export function getpycurve(BH_TableRows: any, LayerData: any, ElementStructList: any){
+export function getELEMlist(E_LIST:any){
 	return checkPyScriptReady(() => {
-		const py_pycurve = pyscript.interpreter.globals.get('py_pycurve');
-		const result = py_pycurve(JSON.stringify(BH_TableRows), JSON.stringify(LayerData), JSON.stringify(ElementStructList));
+		const py_get_ELEM_list = pyscript.interpreter.globals.get('py_get_ELEM_list');
+		console.log('E_LIST', E_LIST)
+		const result = py_get_ELEM_list(E_LIST);
 		return JSON.parse(result);
 	});
 }

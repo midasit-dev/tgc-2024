@@ -181,10 +181,7 @@ class MidasAPI:
         if item_name not in responseJson:
             error_message = {"error": f"Error: Unable to find the registry key or value for {item_name}"}
             return error_message
-        if item_id_str not in responseJson[item_name]:
-            error_message = {"error": f"Error: Unable to find the registry key or value for {item_id}"}
-            return error_message
-        return responseJson[item_name][item_id_str]
+        return responseJson[item_name]
     
     def db_update(self, item_name, items):
         url = f'{self.base_url}/db/{item_name}'

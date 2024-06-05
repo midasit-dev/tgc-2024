@@ -3,7 +3,7 @@ import {SetRecoilState, atom, selector,DefaultValue} from 'recoil';
 export const BH_Columns = atom({
   key: 'BH_Columns',
   default: [
-    { field: 'Index', headerName: 'Index', width: 100, editable: false },
+    { field: 'Index', headerName: 'Index (m)', width: 100, editable: false },
     { field: 'BH1', headerName: 'BH 1', width: 80, editable: true },
   ]
 });
