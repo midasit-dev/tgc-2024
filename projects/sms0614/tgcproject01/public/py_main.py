@@ -2,6 +2,7 @@
 import json
 from py_base import set_g_values, get_g_values, requests_json, MidasAPI, Product
 from py_base_sub import HelloWorld, ApiGet
+from py_pycurve import create_pycurve
 ### do not delete this import scripts ###
 
 def py_db_create(item_name, items):
@@ -88,3 +89,11 @@ def py_get_ELEM_list(E_LIST):
 				ElementList[i]['CORD'] = CORD_Array
 			print('ElementList : ', ElementList)
 	return json.dumps(ElementList)
+
+
+def py_pycurve(BH_TableRows, LayerData, ElementStructList):
+	BH_TableRows_ = json.loads(BH_TableRows)
+	LayerData_ = json.loads(LayerData)
+	ElementStructList_ = json.loads(ElementStructList)
+	result = create_pycurve(BH_TableRows_, LayerData_, ElementStructList_)
+	return result
