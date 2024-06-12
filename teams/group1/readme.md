@@ -1,2 +1,10 @@
-# 1조
-김현덕 / 도기봉 / 김승준 / 조재은
+<!-- markdownlint-disable-next-line -->
+<br />
+<p align="center">
+  <a href="https://midasit.com/" rel="noopener" target="_blank"><img width="150" src="https://raw.githubusercontent.com/midasit-dev/moaui-fixed-repo/main/svg/logo_circle_30p.svg" alt="moaui logo"></a>
+</p>
+
+<h1 align="center">cra-template-moaui (for code)</h1>
+
+<p align="center">To upload the created code to a version control repository like GitHub and provide explanations, <br />
+you can modify this README.md file.</p>
