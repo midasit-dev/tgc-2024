@@ -108,7 +108,7 @@ def get_pycurve(pycurve_):
 def create_pycurve_by_node(layer_id, layer_data, weight_w, layers_h, WL, node, is_WL):
 
     soil_coeff = "Rankine"
-    direction = 2
+    direction = 1
     kh = layer_data[layer_id]["KH"]
     soil_type = layer_data[layer_id]["SoilType"]
     frict = np.radians(layer_data[layer_id]["friction_angle"])
@@ -128,9 +128,9 @@ def create_pycurve_by_node(layer_id, layer_data, weight_w, layers_h, WL, node, i
         disp_Hp = stress_Hp/kh
         dleng = disp_Hp*2.0
 
-        x_data = [[-disp_Hp-dleng, -disp_Hp, 0.0, disp_Hp, disp_Hp+dleng]]
+        x_data = [-disp_Hp-dleng, -disp_Hp, 0.0, disp_Hp, disp_Hp+dleng]
         y_data_ = np.array([-stress_Hp, -stress_Hp, 0.0, stress_Hp, stress_Hp])*area
-        y_data = [list(y_data_)]
+        y_data = list(y_data_)
 
     elif direction == 2:
         disp_Ha = (stress_Ha-stress_H0)/kh
