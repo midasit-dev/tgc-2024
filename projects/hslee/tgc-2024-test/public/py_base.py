@@ -23,7 +23,7 @@ def get_g_values():
 # from javascript import globalThis
 # fetch = globalThis.fetch
 # JSON = globalThis.JSON
-#from js import fetch, JSON, XMLHttpRequest
+from js import fetch, JSON, XMLHttpRequest
 import json
 import numpy as np
 
@@ -37,9 +37,12 @@ class utils:
       return text.startswith('{') and text.endswith('}') or text.startswith('[') and text.endswith(']')
             
     def response_handler(xhr):
+      print('response-handler', xhr.responseText)
       if (utils.is_json(xhr.responseText)):
+        print('utils.is_json')
         return json.loads(xhr.responseText)
       else: 
+        print('not json!')
         return utils.ERROR_DICT(postfix=xhr.responseURL)
 
 class requests_json:
@@ -57,6 +60,7 @@ class requests_json:
 
     def get(url, headers):
       try:
+        print('request_json.get-start', url, headers)
         xhr = XMLHttpRequest.new()
         xhr.open("GET", url, False)
         for key, value in headers.items():
@@ -155,7 +159,9 @@ class MidasAPI:
     
     def db_read(self, item_name):
         url = f'{self.base_url}/db/{item_name}'
+        print('db_read', url, self.headers)
         responseJson = requests_json.get(url, headers=self.headers)
+        print('responseJson', responseJson)
         # check response.json()[item_name] is Exist
         if item_name not in responseJson:
             error_message = {"error": f"Error: Unable to find the registry key or value for {item_name}"}
