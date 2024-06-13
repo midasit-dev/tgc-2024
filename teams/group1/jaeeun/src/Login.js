@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import moaui from '@midasit-dev/moaui';
 
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${window.location.origin}/oauth`;
 
@@ -110,7 +111,7 @@ const Login = () => {
             const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
             console.log('Fetching API Data from:', apiEndpoint);  // API 엔드포인트 콘솔에 출력
             const apiResponse = await axios.get(apiEndpoint, {
-                headers: { "MAPI-Key": "eyJ1ciI6ImNqZTAzMDciLCJwZyI6ImNpdmlsIiwiY24iOiIycFA0UmpzZFRRIn0.2086fc8e15e040c971144a9382487e90764395292bf99246232a4a18262df1dd" }
+                headers: { "MAPI-Key": "eyJ1ciI6ImtoZDA4MTFAbWlkYXNpdC5jb20iLCJwZyI6ImNpdmlsIiwiY24iOiJmSkVKY3I5alR3In0.e7a443214757197180de5da24b422478da114452c3b71d09f42842967abece0a" }
             });
             console.log('API Response:', apiResponse.data);
 
@@ -145,7 +146,7 @@ const Login = () => {
             },
             success: (response) => {
                 console.log('Message sent successfully:', response);
-                alert('메시지를 성공적으로 보냈습니다.');
+                //alert('메시지를 성공적으로 보냈습니다.');
             },
             fail: (error) => {
                 console.error('Error sending message:', error);
@@ -169,30 +170,36 @@ const Login = () => {
 
     return (
         <Container>
-            <Title>Login with Kakao</Title>
-            {!accessToken ? (
-                <Button onClick={handleLogin}>Login with Kakao</Button>
-            ) : (
-                <div>
-                    <Input
-                        type="number"
-                        value={interval}
-                        onChange={(e) => setIntervalTime(Number(e.target.value))}
-                        placeholder="간격을 입력하세요 (초 단위)"
-                    />
-                    <p>현재 간격: {interval} 초</p>
-                    <Button onClick={startInterval}>Start</Button>
-                    <Button onClick={stopInterval}>Stop</Button>
-                    <LogContainer>
-                        {logs.map((log, index) => (
-                            <LogItem key={index}>
-                                <LogTime>{log.time}</LogTime>
-                                <LogMessage>{log.message}</LogMessage>
-                            </LogItem>
-                        ))}
-                    </LogContainer>
-                </div>
-            )}
+            <moaui.GuideBox show spacing={5} center fill="1" width={320} height={640}>
+                <moaui.Typography variant='h1' size='large'>Login with Kakao</moaui.Typography>
+
+                {!accessToken ? (
+                    <moaui.Button color="negative" onClick={handleLogin}>Login with Kakao</moaui.Button>
+                ) : (
+                    <div>
+                        <moaui.GuideBox spacing={1} center fill="1">
+                            <moaui.Typography variant='h1' size='large'>Login with Kakao2</moaui.Typography>
+                            <Input
+                                type="number"
+                                value={interval}
+                                onChange={(e) => setIntervalTime(Number(e.target.value))}
+                                placeholder="간격을 입력하세요 (초 단위)"
+                            />
+                            <p>현재 간격: {interval} 초</p>
+                            <moaui.Button color="negative" onClick={startInterval}>Start</moaui.Button>
+                            <moaui.Button color="negative" onClick={stopInterval}>Stop</moaui.Button>
+                            <LogContainer>
+                                {logs.map((log, index) => (
+                                    <LogItem key={index}>
+                                        <LogTime>{log.time}</LogTime>
+                                        <LogMessage>{log.message}</LogMessage>
+                                    </LogItem>
+                                ))}
+                            </LogContainer>
+                        </moaui.GuideBox>
+                    </div>
+                )}
+            </moaui.GuideBox>
         </Container>
     );
 };
