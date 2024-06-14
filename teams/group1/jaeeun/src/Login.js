@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import moaui from '@midasit-dev/moaui';
 
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${window.location.origin}/oauth`;
+// const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ac0506a8db3a483c5f811bd0bd122de0&redirect_uri=${window.location.origin}/oauth`;
 
 const Container = styled.div`
   display: flex;
@@ -64,10 +65,14 @@ const LogMessage = styled.div`
 const Login = () => {
     const [accessToken, setAccessToken] = useState(null);
     const [logs, setLogs] = useState([]);
-    const [interval, setIntervalTime] = useState(15); // 기본값 15초
+    const [interval, setIntervalTime] = useState(5); // 기본값 5초
     const [title, setTitle] = useState('Login with Kakao');
     const intervalIdRef = useRef(null);
     
+    useEffect(() => {
+        console.log('accessToken 변경 감지', accessToken);
+    }, [accessToken]);
+
     useEffect(() => {
         const handleAuth = async () => {
             const url = new URL(window.location.href);
@@ -88,6 +93,7 @@ const Login = () => {
                             'Content-Type': 'application/x-www-form-urlencoded',
                         },
                     });
+                    
                     console.log('Token Response:', response.data);  // 토큰 응답을 콘솔에 출력
                     setAccessToken(response.data.access_token);
                     setTitle("Login successful!");
@@ -119,7 +125,8 @@ const Login = () => {
             const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
             console.log('Fetching API Data from:', apiEndpoint);  // API 엔드포인트 콘솔에 출력
             const apiResponse = await axios.get(apiEndpoint, {
-                headers: { "MAPI-Key": "eyJ1ciI6ImtoZDA4MTFAbWlkYXNpdC5jb20iLCJwZyI6ImNpdmlsIiwiY24iOiJmSkVKY3I5alR3In0.e7a443214757197180de5da24b422478da114452c3b71d09f42842967abece0a" }
+                // headers: { "MAPI-Key": window.localStorage.getItem('mapiKey') }
+                headers: { "MAPI-Key": '' }
             });
             console.log('API Response:', apiResponse.data);
 
@@ -143,21 +150,32 @@ const Login = () => {
                 Status: lastStageStatus,
                 Progress: lastStageProgress,
             };
-            setLogs((prevLogs) => [...prevLogs, logEntry]);
+
+            const timeString = logEntry['time'];
+            const stageName = logEntry['Stage'];
+            const stageStatus = logEntry['Status'];
+            const stageProgress = logEntry['Progress'];
+            const log = `${timeString} - ${stageName} (${stageStatus}) Progress: ${stageProgress}`;
+            setLogs((prevLogs) => [log, ...prevLogs]);
 
             // 해석이 완료되면 Interval 종료
-            if (lastStageName === "Post-mode") {
-                stopInterval();
+            if (lastStageName === "Post-Mode") {
+                if (intervalIdRef.current) {
+                    console.log('clear interval');
+                    clearInterval(intervalIdRef.current);
+                }
                 sendKakaoMessage("해석이 완료되었습니다.");
+            } else {
+                // sendKakaoMessage(apiResponse.data);
+                sendKakaoMessage(logEntry);
             }
-
-            sendKakaoMessage(apiResponse.data);
         } catch (error) {
             console.error('Error fetching API data', error);
         }
     };
 
     const sendKakaoMessage = (data) => {
+        console.log('accessToken:', accessToken);
         if (!accessToken) return;
 
         window.Kakao.Auth.setAccessToken(accessToken);
@@ -167,7 +185,7 @@ const Login = () => {
             data: {
                 template_object: {
                     object_type: 'text',
-                    text: `API 호출 결과: ${JSON.stringify(data)}`,
+                    text: `API 호출 결과: ${JSON.stringify(data, null, 2)}`,
                     link: {
                         web_url: 'http://www.naver.com',
                         mobile_web_url: 'http://www.naver.com',
@@ -186,42 +204,19 @@ const Login = () => {
     };
 
     const startInterval = () => {
+        console.log('start interval ')
         if (intervalIdRef.current) {
             clearInterval(intervalIdRef.current);
         }
         intervalIdRef.current = setInterval(fetchApiDataAndSendMessage, interval * 1000);
     };
 
-    const ComponentsDropListDropdown = ({ onValueChange }) => {
-        const [value, setValue] = useState(15);
-    
-        function onChangeHandler(event) {
-            const newValue = parseInt(event.target.value, 10);
-            setValue(newValue);
-            onValueChange(newValue); // 선택된 값을 부모 컴포넌트로 전달
-        }
-    
-        const items = new Map([
-            ['15', 15],
-            ['30', 30],
-            ['60', 60],
-            ['120', 120]
-        ]);
-    
-        return (
-            <moaui.DropList 
-                itemList={items} 
-                width="100px" 
-                value={value}
-                onChange={onChangeHandler}
-            />
-        );
-    }
+    // const handleDropListChange = (value) => {
+    //     console.log('Interval value:', value); // interval 값 로그 출력
+    //     setIntervalTime(Number(value)); // 선택된 값을 interval 변수에 설정
+    // };
 
-    const handleDropListChange = (value) => {
-        console.log('Interval value:', value); // interval 값 로그 출력
-        setIntervalTime(Number(value)); // 선택된 값을 interval 변수에 설정
-    };
+    const [ mapiKeyText, setMapiKeyText ] = useState('');
 
     return (
         <Container>
@@ -232,20 +227,34 @@ const Login = () => {
                     <moaui.Button color="negative" onClick={handleLogin}>Login with Kakao</moaui.Button>
                 ) : (
                     <div>
-                        <moaui.GuideBox spacing={1} center fill="1">
+                        {/* {accessToken} */}
+                        <moaui.GuideBox spacing={2} center fill="1" padding={1}>
                             {/* <Input
                                 type="number"
                                 value={interval}
                                 onChange={(e) => setIntervalTime(Number(e.target.value))}
                                 placeholder="간격을 입력하세요 (초 단위)"
                             /> */}
+                            {/* <moaui.GuideBox row horSpaceBetween spacing={2}>
+                                <moaui.TextField
+                                    title='mapiKey' 
+                                    width={100} 
+                                    wrappedWidth='100%'
+                                    onChange={(e) => setMapiKeyText(e.target.value)}
+                                />
+                                <moaui.Button onClick={() => window.localStorage.setItem('mapiKey', mapiKeyText)}>
+                                    Save
+                                </moaui.Button>
+                            </moaui.GuideBox> */}
+
                             <moaui.Typography variant='h2'>Enter API transmission interval.</moaui.Typography>
-                            <ComponentsDropListDropdown onValueChange={handleDropListChange} />
+                            <ComponentsDropListDropdown setIntervalTime={setIntervalTime} />
                             <moaui.Typography variant='h2'>현재 간격: {interval} 초</moaui.Typography>
                             <moaui.Stack direction='row' spacing={1}>
                                 <moaui.Button color="negative" onClick={startInterval}>Start</moaui.Button>
                                 <moaui.Button color="negative" onClick={stopInterval}>Stop</moaui.Button>
                             </moaui.Stack>
+                            <ComponentLog logs={logs} />
                             {/* {<moaui.DataGrid
                                 {logs.reverse().map((log, index) => (
                                     <LogItem key={index}>
@@ -279,3 +288,43 @@ const Login = () => {
 };
 
 export default Login;
+
+const ComponentsDropListDropdown = (props) => {
+    const { setIntervalTime } = props;
+    const [value, setValue] = useState(5);
+
+    return (
+        <moaui.DropList 
+            itemList={[
+                ['5', 5],
+                ['15', 15],
+                ['30', 30],
+                ['60', 60],
+                ['120', 120]
+            ]} 
+            width="100px" 
+            value={value}
+            onChange={(event) => {
+                setValue(event.target.value);
+                setIntervalTime(event.target.value); // 선택된 값을 부모 컴포넌트로 전달
+            }}
+        />
+    );
+}
+
+const ComponentLog = (props) => {
+    const { logs } = props;
+
+    return (
+        <moaui.Scrollbars width='100%' height={150}>
+            <moaui.GuideBox spacing={0.5}>
+                <moaui.Typography variant='h1'>Logs ...</moaui.Typography>
+                {logs.length !== 0 && (
+                    logs.map((log, index) => (
+                        <moaui.Typography key={index}>{log}</moaui.Typography>
+                    ))
+                )}
+            </moaui.GuideBox>
+        </moaui.Scrollbars>
+    )
+}
