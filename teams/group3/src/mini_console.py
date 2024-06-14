@@ -29,21 +29,6 @@ def main():
 
   alist = getData(data)
 
-  for key in data[dbname]:
-    curdata = data[dbname][key]
-    iehp_data = Product()
-
-    iehp_data.name = curdata["NAME"]
-    iehp_data.desc = curdata["DESC"]
-    iehp_data.loc  = curdata["LOCATION"]
-
-    prop_size = len(curdata["ALL_PROP"])
-
-    #for PropD in curdata["ALL_PROP"]:
-    #  curKINEMA = PropD["KINEMA"] 
-    
-    alist = []
-    alist.append(iehp_data)
 
   aa = 1
 

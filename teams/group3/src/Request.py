@@ -2,7 +2,7 @@ import requests
 
 from dataclasses import dataclass
 
-class Product: 
+class IehpInfo: 
     name: str = None
     desc: str = None
     loc:  str = None
@@ -44,21 +44,25 @@ def get(url, mapiKey):
 def getData(data):
   dbname = 'IEHP'
 
+  alist = []
   for key in data[dbname]:
     curdata = data[dbname][key]
-    iehp_data = Product()
+    iehp_data = IehpInfo()
 
     iehp_data.name = curdata["NAME"]
     iehp_data.desc = curdata["DESC"]
     iehp_data.loc  = curdata["LOCATION"]
+    #iehp_data.val  = curdata["???"]
 
     prop_size = len(curdata["ALL_PROP"])
 
     #for PropD in curdata["ALL_PROP"]:
-    #  curKINEMA = PropD["KINEMA"] 
+    #  curKINEMA = PropD["KINEMA"]     
     
-    alist = []
     alist.append(iehp_data)
 
-    return alist
+  # val 를 기준으로 정렬
+  sorted_data = sorted(alist, key=lambda IehpInfo: IehpInfo.val)
+
+  return alist
      
