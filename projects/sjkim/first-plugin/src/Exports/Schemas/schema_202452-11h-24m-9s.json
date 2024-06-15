@@ -1,0 +1,255 @@
+{
+  "canvas": {
+    "width": 640,
+    "height": 640
+  },
+  "layers": [
+    {
+      "id": "1-FloatingBox-06f34060-9572ca7e",
+      "type": "FloatingBox",
+      "props": {
+        "x": 0,
+        "y": 0,
+        "width": 328,
+        "height": 256,
+        "guideBoxProps": {
+          "width": "inherit",
+          "height": "inherit",
+          "center": true,
+          "spacing": 2
+        }
+      },
+      "children": [
+        {
+          "id": "1-TextFieldV2-55486bde-9572ca7e",
+          "type": "TextFieldV2",
+          "props": {
+            "id": "input_id",
+            "autoFocus": false,
+            "type": "text",
+            "placeholder": "Placeholder",
+            "title": "ID",
+            "titlePosition": "left",
+            "error": false,
+            "disabled": false,
+            "width": "150px",
+            "titleXs": 3,
+            "inputXs": 9,
+            "height": "30px",
+            "textAlign": "left",
+            "multiline": false,
+            "rows": 1,
+            "maxRows": 1,
+            "gap": 1,
+            "inputAlign": "left",
+            "singleLineTitle": false
+          },
+          "children": []
+        },
+        {
+          "id": "2-TextFieldV2-6641d45a-9572ca7e",
+          "type": "TextFieldV2",
+          "props": {
+            "id": "input_x",
+            "autoFocus": false,
+            "type": "text",
+            "placeholder": "Placeholder",
+            "title": "X",
+            "titlePosition": "left",
+            "error": false,
+            "disabled": false,
+            "width": "150px",
+            "titleXs": 3,
+            "inputXs": 9,
+            "height": "30px",
+            "textAlign": "left",
+            "multiline": false,
+            "rows": 1,
+            "maxRows": 1,
+            "gap": 1,
+            "inputAlign": "left",
+            "singleLineTitle": false
+          },
+          "children": []
+        },
+        {
+          "id": "3-TextFieldV2-d0547970-9572ca7e",
+          "type": "TextFieldV2",
+          "props": {
+            "id": "input_y",
+            "autoFocus": false,
+            "type": "text",
+            "placeholder": "Placeholder",
+            "title": "Y",
+            "titlePosition": "left",
+            "error": false,
+            "disabled": false,
+            "width": "150px",
+            "titleXs": 3,
+            "inputXs": 9,
+            "height": "30px",
+            "textAlign": "left",
+            "multiline": false,
+            "rows": 1,
+            "maxRows": 1,
+            "gap": 1,
+            "inputAlign": "left",
+            "singleLineTitle": false
+          },
+          "children": []
+        },
+        {
+          "id": "4-TextFieldV2-f33f6197-9572ca7e",
+          "type": "TextFieldV2",
+          "props": {
+            "id": "input_z",
+            "autoFocus": false,
+            "type": "text",
+            "placeholder": "Placeholder",
+            "title": "Z",
+            "titlePosition": "left",
+            "error": false,
+            "disabled": false,
+            "width": "150px",
+            "titleXs": 3,
+            "inputXs": 9,
+            "height": "30px",
+            "textAlign": "left",
+            "multiline": false,
+            "rows": 1,
+            "maxRows": 1,
+            "gap": 1,
+            "inputAlign": "left",
+            "singleLineTitle": false
+          },
+          "children": []
+        }
+      ],
+      "parent": null
+    },
+    {
+      "id": "2-FloatingBox-bb29f345-9572ca7e",
+      "type": "FloatingBox",
+      "props": {
+        "x": 328,
+        "y": 0,
+        "width": 312,
+        "height": 256,
+        "guideBoxProps": {
+          "width": "inherit",
+          "height": "inherit",
+          "center": true,
+          "spacing": 2
+        }
+      },
+      "children": [
+        {
+          "id": "1-Button-e38c563c-9572ca7e",
+          "type": "Button",
+          "props": {
+            "id": "button_post",
+            "children": "POST",
+            "disabled": false,
+            "width": "100px",
+            "loading": false,
+            "variant": "contained",
+            "color": "normal"
+          },
+          "children": []
+        },
+        {
+          "id": "2-Button-4c9a711a-9572ca7e",
+          "type": "Button",
+          "props": {
+            "id": "button_put",
+            "children": "PUT",
+            "disabled": false,
+            "width": "100px",
+            "loading": false,
+            "variant": "contained",
+            "color": "normal"
+          },
+          "children": []
+        },
+        {
+          "id": "3-Button-0b935b1e-9572ca7e",
+          "type": "Button",
+          "props": {
+            "id": "button_delete",
+            "children": "DELETE",
+            "disabled": false,
+            "width": "100px",
+            "loading": false,
+            "variant": "contained",
+            "color": "normal"
+          },
+          "children": []
+        },
+        {
+          "id": "4-Button-38cf7697-9572ca7e",
+          "type": "Button",
+          "props": {
+            "id": "button_get",
+            "children": "GET",
+            "disabled": false,
+            "width": "100px",
+            "loading": false,
+            "variant": "contained",
+            "color": "negative"
+          },
+          "children": []
+        }
+      ],
+      "parent": null
+    },
+    {
+      "id": "3-FloatingBox-04a2f559-9572ca7e",
+      "type": "FloatingBox",
+      "props": {
+        "x": 0,
+        "y": 256,
+        "width": 640,
+        "height": 384,
+        "guideBoxProps": {
+          "width": "inherit",
+          "height": "inherit"
+        }
+      },
+      "children": [
+        {
+          "id": "1-CodeBlock-e569cef6-9572ca7e",
+          "type": "CodeBlock",
+          "props": {
+            "id": "print_get",
+            "children": "@getValues",
+            "title": "PRINT GET",
+            "radius": 4,
+            "width": "100%",
+            "backgroundColor": "black",
+            "titlePadding": 1,
+            "titlePaddingX": 1,
+            "titlePaddingY": 1,
+            "codePadding": 1,
+            "codePaddingX": 1,
+            "codePaddingY": 1,
+            "language": "json"
+          },
+          "children": []
+        }
+      ],
+      "parent": null
+    }
+  ],
+  "python": {
+    "rawCode": "",
+    "pySchema": {
+      "schema": {
+        "name": "",
+        "parameters": {},
+        "description": ""
+      },
+      "topK": 0
+    },
+    "argumentComponent": {}
+  }
+}
