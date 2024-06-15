@@ -72,7 +72,10 @@ def import_elements(model):
     for eid,element in sorted(model.elements.items()):
         nids=[0,0,0,0,0,0,0,0]
         counter+=1
-        if element.type == 'CQUAD4':
+        if element.type == 'CBAR':
+            nids[0:2]=element.nodes[0:2]
+            elem_dic[eid]={'TYPE':'BEAM','SECT':1,'MATL':1,'ANGLE':0,'STYPE':0,'NODE':nids}
+        elif element.type == 'CQUAD4':
             nids[0:4]=element.nodes[0:4]
             elem_dic[eid]={'TYPE':'PLATE','SECT':1,'MATL':1,'ANGLE':0,'STYPE':1,'NODE':nids}
         elif element.type == 'CQUAD8':
@@ -108,11 +111,11 @@ def process_file_content(file_content, file_name):
     f.write(file_content)
     f.close()
     model = read_nastran('testfile.txt')
-    Element("step-convert").element.innerText = 'Convert to Midas...'
+    Element("step-convert").element.innerText = 'pyNastran Completed...'
     n=import_nodes(model)
     m=import_elements(model)
-    Element("step-send-to-civil").element.innerText = 'Send to Midas...'
+    Element("step-send-to-civil").element.innerText = 'Civil NX Updated...'
 
     #print(file_content)  # PyScript 콘솔에 출력
     Element("fileContent").element.innerText = f"Nodes:{n} Elements:{m}"  # 화면에 출력
-    Element("step-end").element.innerText = 'Complete Processing!'
+    Element("step-end").element.innerText = 'Process Completed!'

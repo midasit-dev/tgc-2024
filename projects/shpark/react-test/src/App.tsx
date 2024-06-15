@@ -13,7 +13,7 @@ const App = () => {
 			
 			{/** 제목 텍스트 */}
 			<moaui.Typography variant='h1' size="large">
-				Nastran BulkData Converter
+				Nastran BulkData (using pyNastran)
 			</moaui.Typography>
 
 			{/** 실질적인 업로드 태그 (모양이 별로여서 숨김처리) */}
@@ -59,13 +59,13 @@ const App = () => {
 					}
 				}}
 			>
-				Upload and send to Civil NX (.bdf)
+				Import (.bdf) and update to Civil NX
 			</moaui.Button>
 
 			{/** 설명 텍스트 - 업로드 안했을 때 */}
 			{uploadedFileName === 'none' &&
 				<moaui.Typography color='disable'>
-					Please upload a .bdf file to convert.
+					Select a .bdf file to import.
 				</moaui.Typography>
 			}
 
