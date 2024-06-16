@@ -126,7 +126,7 @@ const Login = () => {
             console.log('Fetching API Data from:', apiEndpoint);  // API 엔드포인트 콘솔에 출력
             const apiResponse = await axios.get(apiEndpoint, {
                 // headers: { "MAPI-Key": window.localStorage.getItem('mapiKey') }
-                headers: { "MAPI-Key": '' }
+                headers: { "MAPI-Key": 'eyJ1ciI6ImtoZDA4MTFAbWlkYXNpdC5jb20iLCJwZyI6ImNpdmlsIiwiY24iOiJVWjI2aHNtSlRBIn0.8336c56b68d64b602abdd3bd33631116f274be3335bb0aa6a06a24d5b9cfbea7' }
             });
             console.log('API Response:', apiResponse.data);
 
