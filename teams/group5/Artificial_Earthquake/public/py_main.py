@@ -194,8 +194,6 @@ def curve_fitting(x_data, y_data):
     predict = np.poly1d(model)
     for i in range(len(x_data)):
         y_data[i] -= predict(x_data[i])
-    plt.plot(x_data, y_data)
-    plt.show()
 
 def computeAcceleration(rise_time, level_time, dur_time, Gwg, Fq, Pa, Ftc1, Ftc2, dt):
     nacc = int(dur_time / dt)
