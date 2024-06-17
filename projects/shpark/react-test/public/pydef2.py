@@ -111,7 +111,7 @@ def process_file_content(file_content, file_name):
     f.write(file_content)
     f.close()
     model = read_nastran('testfile.txt')
-    Element("step-convert").element.innerText = 'pyNastran Completed...'
+    Element("step-convert").element.innerText = 'Copyright (c) 2011-2024 Steven Doyle. All rights reserved.'
     n=import_nodes(model)
     m=import_elements(model)
     Element("step-send-to-civil").element.innerText = 'Civil NX Updated...'
