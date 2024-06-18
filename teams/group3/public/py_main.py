@@ -39,6 +39,11 @@ def convert_to_plus_minus(num):
     else:
         raise ValueError("입력값은 0 또는 1이어야 합니다.")
 
+def sequence_id(data):
+    for idx, item in enumerate(data):
+        item['id'] = idx + 1
+    return data
+
 # GEN_API_URL = "https://api-beta.midasit.com:443/gen"
 # MAPI_Key = "eyJ1ciI6ImNyZWNvbjMxIiwicGciOiJnZW4iLCJjbiI6IkRyeVdUWXJVVEEifQ.03138078f1851f14ba76b98bb5e748a0b97c565da781f5c56b6b5d86b4352b08"
 # header = {"MAPI-Key": MAPI_Key}
@@ -142,7 +147,7 @@ def py_main():
     id_counter = 1
     for idx in col_fx + beam_fx :
         # component = I&J 이면 두 번 출력
-        if hinge_location[fx_index] == "2" :
+        if hinge_location[iehp[idx]["HINGE_LOCATION"][fx_index]] == "I&J" :
             for i in range(2) :
                 # +,- 한 번씩 출력
                 for j in range(2):
@@ -197,7 +202,7 @@ def py_main():
     id_counter = 1
     for idx in col_fy + beam_fy :
         # component = I&J 이면 두 번 출력
-        if hinge_location[fx_index] == "2" :
+        if hinge_location[iehp[idx]["HINGE_LOCATION"][fy_index]] == "I&J" :
             for i in range(2) :
                 # +,- 한 번씩 출력
                 for j in range(2):
@@ -250,7 +255,7 @@ def py_main():
     id_counter = 1
     for idx in col_fz + beam_fz :
         # component = I&J 이면 두 번 출력
-        if hinge_location[fx_index] == "2" :
+        if hinge_location[iehp[idx]["HINGE_LOCATION"][fz_index]] == "I&J" :
             for i in range(2) :
                 # +,- 한 번씩 출력
                 for j in range(2):
@@ -306,7 +311,7 @@ def py_main():
     for idx in col_mx + beam_mx :
         # +,- 한 번씩 출력
         # component = I&J 이면 두 번 출력
-        if hinge_location[fx_index] == "2" :
+        if hinge_location[iehp[idx]["HINGE_LOCATION"][mx_index]] == "I&J" :
             for i in range(2) :
                 for j in range(2):
                     list_temp = []
@@ -358,7 +363,7 @@ def py_main():
     id_counter = 1
     for idx in col_my + beam_my :
         # component = I&J 이면 두 번 출력
-        if hinge_location[fx_index] == "2" :
+        if hinge_location[iehp[idx]["HINGE_LOCATION"][my_index]] == "I&J" :
             for i in range(2) :
                 # +,- 한 번씩 출력
                 for j in range(2):
@@ -412,7 +417,7 @@ def py_main():
     id_counter = 1
     for idx in col_mz + beam_mz :
         # component = I&J 이면 두 번 출력
-        if hinge_location[fx_index] == "2" :
+        if hinge_location[iehp[idx]["HINGE_LOCATION"][mz_index]] == "I&J" :
             for i in range(2) :
                 # +,- 한 번씩 출력
                 for j in range(2):
@@ -461,15 +466,13 @@ def py_main():
                     }
                     row_mz.append(row)
                     id_counter += 1
-
-    print(row_fx)
-    print(row_fy)
-    print(row_fz)
-    
+    row_axial = row_fx
+    row_shear = sequence_id(row_fy + row_fz)
+    row_moment = sequence_id(row_mx + row_my + row_mz)
     all = {
-      "axial": row_fx,
-			"shear": row_fy + row_fz,
-			"moment": row_mx + row_my + row_mz,
+        "axial": row_axial,
+        "shear": row_shear,
+        "moment": row_moment,
 		}
 
     return json.dumps(all)
