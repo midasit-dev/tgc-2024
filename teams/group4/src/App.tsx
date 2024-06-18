@@ -1,67 +1,116 @@
-/**
- * 
- * ██████╗        █████╗ ██████╗ ██████╗ 
- * ╚════██╗      ██╔══██╗██╔══██╗██╔══██╗
- *  █████╔╝█████╗███████║██████╔╝██████╔╝
- *  ╚═══██╗╚════╝██╔══██║██╔═══╝ ██╔═══╝ 
- * ██████╔╝      ██║  ██║██║     ██║     
- * ╚═════╝       ╚═╝  ╚═╝╚═╝     ╚═╝     
- * 
- * @description Entry point for the application after Wrapper
- * @next last entry point
- */
-
 import React from 'react';
-import moa, { 
-	GuideBox, 
-	Panel,
-} from '@midasit-dev/moaui';
-import { default as WelcomeDevTools } from './DevTools/Welcome';
+import m from '@midasit-dev/moaui';
 import { make_curve_data } from './utils_pyscript';
-const opacity = 0.5;
-//If you want to test, try using the GuideApp component.
-//import GuideApp from './SampleComponents/GuideApp';
+import { Skeleton } from '@mui/material';
+import { useSnackbar } from 'notistack';
 
-/**
- * You can modify the code here and test.
- * 
- * @description You can start from the Panel Component below.
- * 							You can add the Component you want.
- *							You can check the version of the library you are currently using by opening the developer tool.
- * 
- * For more information about the library, please refer to the link below.
- * @see https://midasit-dev.github.io/moaui
- */
 const App = () => {
-	const [ nodeData, setNodeData ] = React.useState<string>('empty');
+	const [ csvResult, setCsvResult ] = React.useState<string>('');
+	const [ loadingExtract, setLoadingExtract ] = React.useState<boolean>(false);
+	const [ loadingClear, setLoadingClear ] = React.useState<boolean>(false);
+	const { enqueueSnackbar } = useSnackbar();
+
+	React.useEffect(() => {
+		if (loadingExtract) {
+			setTimeout(() => {
+				try {
+					const result: string = make_curve_data();
+					setCsvResult(result);
+				} catch ( err ) {
+					enqueueSnackbar('Failed to extract data.', { variant: 'error' });
+					console.error(err);
+				} finally {
+					setLoadingExtract(false);
+				}
+			}, 1000);
+		}
+	}, [loadingExtract, enqueueSnackbar]);
+
+	React.useEffect(() => {
+		if (loadingClear) {
+			setTimeout(() => {
+        try {
+          setCsvResult("");
+        } catch (err) {
+					enqueueSnackbar("Failed to clear data.", { variant: "error" });
+          console.error(err);
+        } finally {
+          setLoadingClear(false);
+        }
+      }, 1000);
+		}
+	}, [loadingClear, enqueueSnackbar]);
 
 	return (
-		<GuideBox width={550} spacing={2} padding={2}>
-			<WelcomeDevTools />
-			<moa.Button
-				onClick={() => {
-					const NODE = make_curve_data();
-					//setNodeData(JSON.stringify(NODE, null, 2));
-					console.log("Node Data:", NODE);
-				}}
-			>
-				클릭하면 선형정보가 만들어집니다.
-			</moa.Button>
-			<pre>
-				{nodeData}
-			</pre>
-			<GuideBox row width='100%' spacing={2} opacity={opacity}>
-				<Panel variant="shadow2" width='50%' height={100}/>
-				<Panel variant="shadow2" width='50%' height={100}/>
-				<Panel variant="shadow2" width='50%' height={100}/>
-			</GuideBox>
-			<GuideBox width='100%' spacing={2} opacity={opacity}>
-				<Panel variant="shadow2" width='100%' height={50}/>
-				<Panel variant="shadow2" width='100%' height={50}/>
-				<Panel variant="shadow2" width='100%' height={50}/>
-			</GuideBox>
-		</GuideBox>
-	);
+    <m.GuideBox width="auto" spacing={2} padding={2}>
+      <m.GuideBox width="100%" spacing={2} row verCenter horSpaceBetween>
+        <m.Typography variant="h1">Girder Wizard Lining Extractor</m.Typography>
+        <m.Button
+          color="negative"
+          onClick={() => setLoadingExtract(true)}
+          loading={loadingExtract}
+        >
+          Extract (.csv)
+        </m.Button>
+      </m.GuideBox>
+
+      <m.GuideBox width='100%' row spacing={2}>
+        <m.Button disabled={csvResult === ''} onClick={() => setLoadingClear(true)} loading={loadingClear}>
+          Clear
+        </m.Button>
+				<m.Button disabled={csvResult === ''} onClick={() => downloadCSV(csvResult)}>
+          Download (.csv)
+        </m.Button>
+      </m.GuideBox>
+
+      <m.GuideBox>
+        <m.Scrollbars
+          width={440}
+          height={300}
+          panelProps={{
+            padding: 0,
+            borderRadius: 0,
+            marginRight: 1.5,
+            variant: "box",
+          }}
+        >
+          {csvResult === "" && <SkeletonList />}
+          {csvResult !== "" && <m.Typography>{csvResult}</m.Typography>}
+        </m.Scrollbars>
+      </m.GuideBox>
+    </m.GuideBox>
+  );
 }
 
 export default App;
+
+function getRandomNumber(min: number, max: number) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const SkeletonList = () => {
+	return (
+			<div>
+					{Array.from({ length: 12 }).map((_, index) => (
+							<Skeleton key={index} width={`${getRandomNumber(50, 100)}%`} />
+					))}
+			</div>
+	);
+};
+
+function downloadCSV(csvString: string) {
+	// CSV 파일 생성
+	const blob = new Blob([csvString], { type: 'text/csv' });
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement('a');
+	a.href = url;
+	a.download = 'output.csv';
+
+	// 다운로드 트리거
+	document.body.appendChild(a);
+	a.click();
+
+	// Clean up
+	document.body.removeChild(a);
+	URL.revokeObjectURL(url);
+}

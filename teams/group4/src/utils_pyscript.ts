@@ -162,7 +162,6 @@ export function dbDelete(itemName: string, item_id: string | number) {
 export function make_curve_data(): any {
 	return checkPyScriptReady(() => {
 		const py_make_curve_data = pyscript.interpreter.globals.get('py_make_curve_data');
-		const result = py_make_curve_data();
-		return JSON.parse(result);
+		return py_make_curve_data();
 	});
 }
