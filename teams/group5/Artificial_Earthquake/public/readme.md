@@ -3,6 +3,7 @@
 - Using the design spectrum, artificial seismic waves can be generated and converted into spectrum load graphs.
 - It includes the **ASCE7** spectrum series standard and data is obtained from the **USGS Seismic Design Geodatabase**.
 <br />
+
 ## Details
 ### version 1.0.0
 - Select design criteria in the design spectrum.
