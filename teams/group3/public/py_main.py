@@ -174,7 +174,6 @@ def py_main():
                     id_counter += 1
         else :
             # +,- 한 번씩 출력
-            id_counter = 1
             for j in range(2):
                 list_temp = []
                 name = iehp[idx]["NAME"]
