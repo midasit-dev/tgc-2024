@@ -179,7 +179,7 @@ export function getELEMlist(E_LIST:any){
 export function getpycurve(BH_TableRows:any, LayerData:any, ElementStructList:any){
 	return checkPyScriptReady(() => {
 		const py_pycurve = pyscript.interpreter.globals.get('py_pycurve');
-		const result = py_pycurve(BH_TableRows, LayerData, ElementStructList);
+		const result = py_pycurve(JSON.stringify(BH_TableRows), JSON.stringify(LayerData), JSON.stringify(ElementStructList));
 		return JSON.parse(result);
 	});
 }

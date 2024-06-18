@@ -43,7 +43,7 @@ function LayerTable(){
     const LayerDataNum = layerData.length
     if (LayerDataNum < LayerNum){
       const newLayerData = JSON.parse(JSON.stringify(layerData))
-      newLayerData.push({ id: LayerDataNum+1, LayerNo: LayerDataNum+1, SoilType: 'Sand', KH: 0, gamma_t: 0, gamma_sat: 0, friction_angle: 0, friction_force: 0, diameter: 0 })
+      newLayerData.push({ id: LayerDataNum+1, LayerNo: LayerDataNum+1, SoilType: 'Sand', KH: 0, gamma_t: 0, gamma_sat: 0, friction_angle: 0, cohesion: 0, circumference: 0 })
       setLayerData(newLayerData)
     }
     else if (LayerDataNum > LayerNum){

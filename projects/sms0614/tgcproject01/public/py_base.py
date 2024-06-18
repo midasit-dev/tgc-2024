@@ -146,7 +146,9 @@ class MidasAPI:
     
     ## db #############################################################################################################
     def db_create(self, item_name, items):
+        print(items)
         url = f'{self.base_url}/db/{item_name}'
+        
         return requests_json.post(url, headers=self.headers, jsonObj={'Assign': items})
     
     def db_create_item(self, item_name, item_id, item):

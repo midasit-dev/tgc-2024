@@ -2,6 +2,9 @@ import json
 import numpy as np
 
 def create_pycurve(BH_TableRows, LayerData, ElementStructList):
+    BH_TableRows = json.loads(BH_TableRows)
+    LayerData = json.loads(LayerData)
+    ElementStructList = json.loads(ElementStructList)
     nodes = get_nodes(ElementStructList)
     boreholes, x_coords, WL_data, is_WL = get_borehole_and_waterlevel(BH_TableRows)
     layer_data = get_layer_data(LayerData)
@@ -33,7 +36,6 @@ def create_pycurve(BH_TableRows, LayerData, ElementStructList):
         pycurve_[node_id] = [x_data, y_data]
     
     pycurve = json.dumps(get_pycurve(pycurve_), indent=4)
-    print("pycurve: ", pycurve)
 
     return pycurve
 
@@ -109,12 +111,12 @@ def create_pycurve_by_node(layer_id, layer_data, weight_w, layers_h, WL, node, i
 
     soil_coeff = "Rankine"
     direction = 1
-    kh = layer_data[layer_id]["KH"]
+    kh = float(layer_data[layer_id]["KH"])
     soil_type = layer_data[layer_id]["SoilType"]
-    frict = np.radians(layer_data[layer_id]["friction_angle"])
-    cohes = layer_data[layer_id]["cohesion"]
-    circum = layer_data[layer_id]["circumference"]
-    length = node["length"]
+    frict = np.radians(float(layer_data[layer_id]["friction_angle"]))
+    cohes = float(layer_data[layer_id]["cohesion"])
+    circum = float(layer_data[layer_id]["circumference"])
+    length = float(node["length"])
     area = circum*length
 
     stress_Ve, stress_w = calculate_vertical_stress(layer_data, weight_w, layers_h, WL, node, is_WL)
@@ -194,8 +196,8 @@ def calculate_vertical_stress(layer_data, weight_w, layers_h, WL, node, is_WL):
     for id, lay_h in layers_h.items():
         lay_data = layer_data[id]
 
-        weight_t = lay_data["gamma_t"]
-        weight_sat = lay_data["gamma_sat"]
+        weight_t = float(lay_data["gamma_t"])
+        weight_sat = float(lay_data["gamma_sat"])
         weight_sub = weight_sat - weight_w
 
         lay_hi = layers_h[id][0]
@@ -477,4 +479,3 @@ ElementList = [
     }
 ]
 
-create_pycurve(BH_TableRows, LayerData, ElementList)

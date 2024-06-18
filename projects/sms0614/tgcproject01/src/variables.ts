@@ -56,3 +56,8 @@ export const STGroups = atom({
   key : 'STGroups',
   default : [] as any
 })
+
+export const ElemList = atom({
+  key : 'ElemList',
+  default : [] as any
+})

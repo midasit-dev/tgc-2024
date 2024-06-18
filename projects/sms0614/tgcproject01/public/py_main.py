@@ -87,13 +87,61 @@ def py_get_ELEM_list(E_LIST):
 				for j in range(len(ElementList[i]['NODE'])):
 					CORD_Array.append([response[str(ElementList[i]['NODE'][j])]['X'],response[str(ElementList[i]['NODE'][j])]['Z']])
 				ElementList[i]['CORD'] = CORD_Array
-			print('ElementList : ', ElementList)
 	return json.dumps(ElementList)
 
 
 def py_pycurve(BH_TableRows, LayerData, ElementStructList):
-	BH_TableRows_ = json.loads(BH_TableRows)
-	LayerData_ = json.loads(LayerData)
-	ElementStructList_ = json.loads(ElementStructList)
-	result = create_pycurve(BH_TableRows_, LayerData_, ElementStructList_)
-	return result
+	result = create_pycurve((BH_TableRows), (LayerData), (ElementStructList))
+	result = json.loads(result)
+	civil = MidasAPI(Product.CIVIL, "KR")
+	response = civil.db_get_max_id("MLFC")
+	max_id = response + 1	
+	Assign_MFLC_JSON = {}
+	Assign_NSPR_JSON = {}
+	for i in range(len(result)):
+		data = result[i]
+		item_array = []
+		x_values = data['X']
+		y_values = data['Y']
+		for i in range(len(x_values)):
+			item_array.append({
+				"X" : x_values[i],
+				"Y" : y_values[i]
+			})
+
+		Assign_MFLC_JSON[max_id] = {
+			"NAME" : str("PY_" + str(data['NODE'])),
+			"TYPE" : "FORCE",
+			"SYMM" : False,
+			"FUNC_ID" : 0,
+			"ITEMS" : item_array
+		}
+		max_id = max_id + 1
+
+	max_id = response + 1
+	for i in range(len(result)):
+		data = result[i]
+		Assign_NSPR_JSON[data['NODE']] = {
+			"ITEMS" : [
+				{
+					"ID" : 1,
+					"TYPE" : "MULTI",
+					"FormType" : 0,
+					"EFFAREA" : 0,
+					"DK" : [
+						0,0,0
+					],
+					"DIR" : 0,
+					"DV" : [
+						0,0,0
+					],
+					"FUNCTION" : max_id
+				}
+			]
+		}
+		max_id = max_id + 1
+	response = civil.db_create("MLFC", (Assign_MFLC_JSON))
+	response_NSPR = civil.db_create("NSPR", (Assign_NSPR_JSON))
+	print('response : ', response)
+	print('response_NSPR : ', response_NSPR)
+	return json.dumps(response)

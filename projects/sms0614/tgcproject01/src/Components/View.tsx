@@ -177,7 +177,7 @@ function View(){
     setYMinLevel(YMin)
     setXMaxPos(XMax)
     setXMinPos(XMin)
-  }, [BHTableRows]);
+  }, [BHTableRows, BH_Count, Layer_Count]);
 
   return(
     <GuideBox width={320} padding={1}>

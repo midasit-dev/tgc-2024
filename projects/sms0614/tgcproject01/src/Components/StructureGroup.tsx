@@ -8,24 +8,27 @@ import {
   ListItemButton,
   Check,
   IconButton, 
-  Icon
+  Icon,
+  Button
 } from '@midasit-dev/moaui';
 import BoringHole from './BoringHoleTable';
 import LayerTable from './LayerTable';
-import { STGroups } from '../variables';
-import {getGRUPlist, getELEMlist} from '../utils_pyscript';
+import { STGroups, ElemList, BH_TableRows, LayerData} from '../variables';
+import {getGRUPlist, getELEMlist, getpycurve} from '../utils_pyscript';
 import { set, size } from 'lodash';
 import StyledComponent from '@midasit-dev/moaui/Components/ColorPicker/Styled';
 import { useSnackbar } from "notistack";
 function StructureGroup(){
   const { enqueueSnackbar } = useSnackbar();
   const [STGroupList, setSTGroupList] = useRecoilState(STGroups);
+  const [ELEMList, setELEMList] = useRecoilState(ElemList);
+  const [BHRows, setBHRows] = useRecoilState(BH_TableRows);
+  const [LayerDataList, setLayerDataList] = useRecoilState(LayerData);
+  const getStructureGroup = () => {
 
-  useEffect(() => {
     const GroupList = getGRUPlist()
-    console.log(JSON.stringify(GroupList))
     if (GroupList.hasOwnProperty('error')) {
-      enqueueSnackbar('Error in getting Group List', { variant: 'error' });
+      enqueueSnackbar('Error in getting Group List', { variant: 'error', autoHideDuration: 3000, });
       return
     }
     const STGroupList_Array = Object.keys(GroupList).map(key => ({
@@ -36,8 +39,15 @@ function StructureGroup(){
       GroupList[key]
     ));
     setSTGroupList(STGroupList_Array);
-    console.log('checkpoint 1')
     const result = getELEMlist(ELEMList_Array)
+    if (result.hasOwnProperty('error')) {
+      enqueueSnackbar('Error in getting Element List', { variant: 'error', autoHideDuration: 3000, });
+      return
+    }
+    setELEMList(result);
+  }
+  useEffect(() => {
+    getStructureGroup()
   }, [])
 
   
@@ -53,23 +63,21 @@ function StructureGroup(){
 	}
 
   const handleGRUPrefresh = () => {
-    const GroupList = getGRUPlist()
-    if (GroupList.hasOwnProperty('error')) {
-      enqueueSnackbar('Error in getting Group List', { variant: 'error', autoHideDuration: 3000, });
-      return
-    }
-    const STGroupList_Array = Object.keys(GroupList).map(key => ({
-      name: key,
-      checked: false
-    }));
-    const ELEMList_Array = Object.keys(GroupList).map(key => (
-      GroupList[key]
-    ));
-    setSTGroupList(STGroupList_Array);
-    const result = getELEMlist(ELEMList_Array)
+    getStructureGroup()
     enqueueSnackbar('Structure Group Updated', { variant: 'success', autoHideDuration: 3000, });
   }
 
+  const handleCalculate = () => {
+    const resultData = STGroupList.reduce((acc:any, item:any, index:any) => {
+      if (item.checked) {
+        acc.push(ELEMList[index]);
+      }
+      return acc;
+    }, []);
+
+    const result = getpycurve(BHRows, LayerDataList, resultData)
+
+  }
   return(
     <GuideBox width={200}>
       <GuideBox width={180} row horSpaceBetween verCenter>
@@ -78,6 +86,7 @@ function StructureGroup(){
             <Icon iconName="Refresh" />
           </IconButton>
       </GuideBox>
+      <div style={{height: 400}}>
       <List dense={true} disablePadding={true}>
         {STGroupList.map((value:any, index:any) => {
           return (
@@ -93,6 +102,11 @@ function StructureGroup(){
           )
         })}
     </List>
+    </div>
+    <Button width='150px' variant='outlined'
+    onClick={handleCalculate}>
+      Calculate
+    </Button>
     </GuideBox>
   )
 }
