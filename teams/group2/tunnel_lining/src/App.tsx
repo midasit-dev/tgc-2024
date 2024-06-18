@@ -60,7 +60,7 @@ const App = () => {
 		setBoundaryCondition(event.target.value);
 	};
 	return (
-		<GuideBox width={500} spacing={2} padding={1}>
+		<GuideBox width={510} spacing={2} padding={2}>
 			<GuideBox spacing={1}>
 				<GuideBox row horSpaceBetween verCenter spacing={1}> 
 					<Icon iconName='Help' />
@@ -108,7 +108,7 @@ const App = () => {
 					</GuideBox>
 					<GuideBox height={75} verCenter spacing={1}>
 						<Typography variant='h1'> ▹ AFTES, 미공병단이론식 </Typography>
-						<img src={AFTES} alt='AFTES' width={130} />
+						<img src={AFTES} alt='AFTES' width={140} />
 					</GuideBox>
 					<GuideBox width={130} height={75} verBottom>
 						<Typography variant='h1'> Es : 주변지반의 탄성계수</Typography>
