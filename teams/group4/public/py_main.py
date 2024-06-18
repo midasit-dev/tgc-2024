@@ -49,33 +49,48 @@ def py_make_curve_data():
         })
     
     # Step 4: Write data to CSV
-    output_path = r'c:\temp\output.csv'
-    try:
-        print('step4')
-        with open(output_path, mode='w', newline='') as file:
-            print('step4-1')
-            writer = csv.writer(file)
-            print('step4-2')
-            # Write Node Info
-            writer.writerow(['Node Info'])
-            writer.writerow(['절점Key', 'x좌표값', 'y좌표값', 'z좌표값'])
-            for node in nodeDetails:
-                writer.writerow([node['Key'], node['X'], node['Y'], node['Z']])
-            print('step4-3')
-            writer.writerow([])  # Empty row for separation
+    # output_path = r'c:\temp\output.csv'
+    # try:
+    #     print('step4')
+    #     with open(output_path, mode='w', newline='') as file:
+    #         print('step4-1')
+    #         writer = csv.writer(file)
+    #         print('step4-2')
+    #         # Write Node Info
+    #         writer.writerow(['Node Info'])
+    #         writer.writerow(['절점Key', 'x좌표값', 'y좌표값', 'z좌표값'])
+    #         for node in nodeDetails:
+    #             writer.writerow([node['Key'], node['X'], node['Y'], node['Z']])
+    #         print('step4-3')
+    #         writer.writerow([])  # Empty row for separation
 
-            # Write Elem Info
-            writer.writerow(['Elem Info'])
-            writer.writerow(['ElemKey', 'NODE 1번 Key', 'NODE 2번 Key'])
-            for elem in elemDetails:
-                writer.writerow([elem['Key'], elem['NODE_1'], elem['NODE_2']])
+    #         # Write Elem Info
+    #         writer.writerow(['Elem Info'])
+    #         writer.writerow(['ElemKey', 'NODE 1번 Key', 'NODE 2번 Key'])
+    #         for elem in elemDetails:
+    #             writer.writerow([elem['Key'], elem['NODE_1'], elem['NODE_2']])
         
-        print(f'CSV file created at: {output_path}')
-    except Exception as e:
-        print(f'Failed to write CSV file: {e}')
+    #     print(f'CSV file created at: {output_path}')
+    # except Exception as e:
+    #     print(f'Failed to write CSV file: {e}')
 
-    return grupDataAll
+    # return grupDataAll
 
-def main():
-    data = py_make_curve_data()
-    print('Data processed:', data)
+		# Step 4: Create CSV String
+    csv_lines = []
+    
+    # Write Node Info
+    csv_lines.append('Node Info')
+    csv_lines.append('NodeKey, x_coord, y_coord, z_coord')
+    for node in nodeDetails:
+        csv_lines.append(f"{node['Key']},{node['X']},{node['Y']},{node['Z']}")
+    
+    csv_lines.append('')  # Empty row for separation
+
+    # Write Elem Info
+    csv_lines.append('Elem Info')
+    csv_lines.append('ElemKey, Node Start Key, Node End Key')
+    for elem in elemDetails:
+        csv_lines.append(f"{elem['Key']},{elem['NODE_1']},{elem['NODE_2']}")
+    
+    return '\n'.join(csv_lines)
