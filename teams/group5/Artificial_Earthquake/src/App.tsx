@@ -59,14 +59,14 @@ const App = () => {
 			<GuideBox center spacing={2}>
 				<GuideBox row spacing={2}>					
 					<Panel variant="shadow2" padding={2}>						
-						<GuideBox width={410} height={365} spacing={2} padding={1} verTop>
+						<GuideBox width={410} height={370} spacing={2} padding={1} verTop>
 							<CompTypographyAndDropList title="Design Code" state={design_spectrum} setState={setDesignSpectrum} blueTitle droplist={design_spectrum_list} width={250}/>
 							<DesignSpectrum />							
 						</GuideBox>
 					</Panel>
 
 					<Panel variant="shadow2" padding={1}>
-						<GuideBox width={410} height={380} verSpaceBetween>
+						<GuideBox width={410} height={385} verSpaceBetween>
 						 	<ArtificalEarthquake />
 						</GuideBox>
 					</Panel>

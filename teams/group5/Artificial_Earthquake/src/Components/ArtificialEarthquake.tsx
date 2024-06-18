@@ -61,7 +61,7 @@ const ArtificalEarthquake = (props: any) => {
                     <CompTypographyAndTextField title="Rise Time (sec)" state={rise_time} setState={setRiseTime} width={120} />
                     <CompTypographyAndTextField title="Level Time (sec)" state={level_time} setState={setLevelTime} width={120} />
                     <CompTypographyAndTextField title="Total Time (sec)" state={total_time} setState={setTotalTime} width={120} />
-                    <CompTypographyAndTextField title="Max. Iterations" state={max_iteration} setState={setMaxIteration} width={120} />
+                    {/* <CompTypographyAndTextField title="Max. Iterations" state={max_iteration} setState={setMaxIteration} width={120} /> */}
                     <CompTypographyAndTextField title="Damping Ratio" state={damping_ratio} setState={setDampingRatio} width={120} />
                     <GuideBox width="100%" row horSpaceBetween>
                         <GuideBox width="inherit" row horSpaceBetween verCenter height={30}>
