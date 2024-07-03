@@ -1,3 +1,5 @@
-# tgc-2024
+# Tech Conference
+- [Tech Conference Landing Page](https://midasit-dev.github.io/tgc-2024/tech-conference)
+
+# TGC-2024
 plugin development technical growth club repository
-- [Tech Conference Landing Page](https://github.io/midasit-dev/tgc-2024/tech-conference)
