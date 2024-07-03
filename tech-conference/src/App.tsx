@@ -36,7 +36,7 @@ function App() {
               duration: 2,
             }}
           >
-            <img src="./ico150_plugins_seismichazardmap.svg" alt="" />
+            <img src={`${process.env.PUBLIC_URL}/assets/ico150_plugins_seismichazardmap.svg`} alt="" />
           </motion.div>
         )}
 
@@ -51,7 +51,7 @@ function App() {
               duration: 2,
             }}
           >
-            <img src="./ico150_plugins_tunnellining.svg" alt="" />
+            <img src={`${process.env.PUBLIC_URL}/assets/ico150_plugins_tunnellining.svg`} alt="" />
           </motion.div>
         )}
       </div>
