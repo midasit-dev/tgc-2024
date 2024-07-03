@@ -394,14 +394,25 @@ main {
 
 #slide-status {
 	margin-top: 10px;
+	margin-bottom: 60px;
 	font-family: 'Pretendard-Regular';
   font-weight: 400;
   font-size: 24px;
 	line-height: 1.7;
   color: white;
 }
+
+#slide-author {
+	margin-top: 10px;
+	font-family: 'Pretendard-Regular';
+  font-weight: 400;
+  font-size: 24px;
+	line-height: 1.7;
+  color: white;
+}
+
 @media screen and (min-width: 800px) {
-  #slider-content #slide-status {
+  #slider-content #slide-status #slide-author {
     font-size: 22px;
   }
 }
@@ -490,3 +501,15 @@ main {
     transform: scale3d(0.5, 0.5, 1);
   }
 }                                          
+
+.qr-code {
+	position: fixed;
+	top: 50px;
+	right: 50px;
+	/* transform: translate(-50%, 0%); */
+	z-index: 10;
+	width: auto;
+	height: auto;
+	border-radius: 10px;
+	opacity: .7;
+}

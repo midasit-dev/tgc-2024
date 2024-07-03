@@ -62,7 +62,7 @@ const displacementSlider = function (opts) {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setClearColor(0x23272A, 1.0);
   renderer.setSize(renderW, renderH);
-	renderer.domElement.style.opacity = .7;
+	renderer.domElement.style.opacity = .3;
   parent.appendChild(renderer.domElement);
 
   let loader = new THREE.TextureLoader();
@@ -116,7 +116,7 @@ const displacementSlider = function (opts) {
     let pagButtons = Array.from(document.getElementById('pagination').querySelectorAll('button'));
     let isAnimating = false;
 
-    pagButtons.forEach(el => {
+    pagButtons.forEach((el, slideIndex) => {
 
       el.addEventListener('click', function () {
 
@@ -126,6 +126,12 @@ const displacementSlider = function (opts) {
 
           document.getElementById('pagination').querySelectorAll('.active')[0].className = '';
           this.className = 'active';
+
+					const csEl = document.getElementById('change-slide');
+					if (csEl) {
+						csEl.innerHTML = slideIndex;
+						csEl.dispatchEvent(new Event('onChangeSlide'));
+					}
 
           let slideId = parseInt(this.dataset.slide, 10);
 
@@ -237,6 +243,6 @@ imagesLoaded(document.querySelectorAll('img'), () => {
 		}
 	};
 
-	setInterval(doPaginationToggle, 3000);
+	setInterval(doPaginationToggle, 5000);
 });
 

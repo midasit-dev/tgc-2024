@@ -62,7 +62,7 @@ const displacementSlider = function (opts) {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setClearColor(0x23272A, 1.0);
   renderer.setSize(renderW, renderH);
-	renderer.domElement.style.opacity = .7;
+	renderer.domElement.style.opacity = .3;
   parent.appendChild(renderer.domElement);
 
   let loader = new THREE.TextureLoader();
@@ -116,7 +116,7 @@ const displacementSlider = function (opts) {
     let pagButtons = Array.from(document.getElementById('pagination').querySelectorAll('button'));
     let isAnimating = false;
 
-    pagButtons.forEach(el => {
+    pagButtons.forEach((el, slideIndex) => {
 
       el.addEventListener('click', function () {
 
@@ -126,6 +126,12 @@ const displacementSlider = function (opts) {
 
           document.getElementById('pagination').querySelectorAll('.active')[0].className = '';
           this.className = 'active';
+
+					const csEl = document.getElementById('change-slide');
+					if (csEl) {
+						csEl.innerHTML = slideIndex;
+						csEl.dispatchEvent(new Event('onChangeSlide'));
+					}
 
           let slideId = parseInt(this.dataset.slide, 10);
 
@@ -145,48 +151,65 @@ const displacementSlider = function (opts) {
 
           let slideTitleEl = document.getElementById('slide-title');
           let slideStatusEl = document.getElementById('slide-status');
+          let slideAuthorEl = document.getElementById('slide-author');
           let nextSlideTitle = document.querySelectorAll(`[data-slide-title="${slideId}"]`)[0].innerHTML;
           let nextSlideStatus = document.querySelectorAll(`[data-slide-status="${slideId}"]`)[0].innerHTML;
+          let nextSlideAuthor = document.querySelectorAll(`[data-slide-author="${slideId}"]`)[0].innerHTML;
 
-          TweenLite.fromTo(slideTitleEl, 0.5,
-          {
-            autoAlpha: 1,
-            y: 0 },
+          TweenLite.fromTo(slideTitleEl, 
+						0.5,
+          	{ autoAlpha: 1, y: 0 },
+          	{
+							autoAlpha: 0,
+							y: 20,
+							ease: 'Expo.easeIn',
+							onComplete: function () {
+								slideTitleEl.innerHTML = nextSlideTitle;
+								TweenLite.to(slideTitleEl, 0.5, {
+									autoAlpha: 1,
+									y: 0 
+								});
+							}
+						}
+					);
 
-          {
-            autoAlpha: 0,
-            y: 20,
-            ease: 'Expo.easeIn',
-            onComplete: function () {
-              slideTitleEl.innerHTML = nextSlideTitle;
+          TweenLite.fromTo(slideStatusEl, 
+						0.5,
+						{ autoAlpha: 1, y: 0 },
+						{
+							autoAlpha: 0,
+							y: 20,
+							ease: 'Expo.easeIn',
+							onComplete: function () {
+								slideStatusEl.innerHTML = nextSlideStatus;
+								TweenLite.to(slideStatusEl, 0.5, {
+									autoAlpha: 1,
+									y: 0,
+									delay: 0.1 
+								});
 
-              TweenLite.to(slideTitleEl, 0.5, {
-                autoAlpha: 1,
-                y: 0 });
+							}
+						}
+					);
 
-            } });
+					TweenLite.fromTo(slideAuthorEl, 
+						0.5,
+						{ autoAlpha: 1, y: 0 },
+						{
+							autoAlpha: 0,
+							y: 20,
+							ease: 'Expo.easeIn',
+							onComplete: function () {
+								slideAuthorEl.innerHTML = nextSlideAuthor;
+								TweenLite.to(slideAuthorEl, 0.5, {
+									autoAlpha: 1,
+									y: 0,
+									delay: 0.1 
+								});
 
-
-          TweenLite.fromTo(slideStatusEl, 0.5,
-          {
-            autoAlpha: 1,
-            y: 0 },
-
-          {
-            autoAlpha: 0,
-            y: 20,
-            ease: 'Expo.easeIn',
-            onComplete: function () {
-              slideStatusEl.innerHTML = nextSlideStatus;
-
-              TweenLite.to(slideStatusEl, 0.5, {
-                autoAlpha: 1,
-                y: 0,
-                delay: 0.1 });
-
-            } });
-
-
+							}
+						}
+					);
         }
 
       });
@@ -237,6 +260,6 @@ imagesLoaded(document.querySelectorAll('img'), () => {
 		}
 	};
 
-	setInterval(doPaginationToggle, 3000);
+	setInterval(doPaginationToggle, 7000);
 });
 
