@@ -151,48 +151,65 @@ const displacementSlider = function (opts) {
 
           let slideTitleEl = document.getElementById('slide-title');
           let slideStatusEl = document.getElementById('slide-status');
+          let slideAuthorEl = document.getElementById('slide-author');
           let nextSlideTitle = document.querySelectorAll(`[data-slide-title="${slideId}"]`)[0].innerHTML;
           let nextSlideStatus = document.querySelectorAll(`[data-slide-status="${slideId}"]`)[0].innerHTML;
+          let nextSlideAuthor = document.querySelectorAll(`[data-slide-author="${slideId}"]`)[0].innerHTML;
 
-          TweenLite.fromTo(slideTitleEl, 0.5,
-          {
-            autoAlpha: 1,
-            y: 0 },
+          TweenLite.fromTo(slideTitleEl, 
+						0.5,
+          	{ autoAlpha: 1, y: 0 },
+          	{
+							autoAlpha: 0,
+							y: 20,
+							ease: 'Expo.easeIn',
+							onComplete: function () {
+								slideTitleEl.innerHTML = nextSlideTitle;
+								TweenLite.to(slideTitleEl, 0.5, {
+									autoAlpha: 1,
+									y: 0 
+								});
+							}
+						}
+					);
 
-          {
-            autoAlpha: 0,
-            y: 20,
-            ease: 'Expo.easeIn',
-            onComplete: function () {
-              slideTitleEl.innerHTML = nextSlideTitle;
+          TweenLite.fromTo(slideStatusEl, 
+						0.5,
+						{ autoAlpha: 1, y: 0 },
+						{
+							autoAlpha: 0,
+							y: 20,
+							ease: 'Expo.easeIn',
+							onComplete: function () {
+								slideStatusEl.innerHTML = nextSlideStatus;
+								TweenLite.to(slideStatusEl, 0.5, {
+									autoAlpha: 1,
+									y: 0,
+									delay: 0.1 
+								});
 
-              TweenLite.to(slideTitleEl, 0.5, {
-                autoAlpha: 1,
-                y: 0 });
+							}
+						}
+					);
 
-            } });
+					TweenLite.fromTo(slideAuthorEl, 
+						0.5,
+						{ autoAlpha: 1, y: 0 },
+						{
+							autoAlpha: 0,
+							y: 20,
+							ease: 'Expo.easeIn',
+							onComplete: function () {
+								slideAuthorEl.innerHTML = nextSlideAuthor;
+								TweenLite.to(slideAuthorEl, 0.5, {
+									autoAlpha: 1,
+									y: 0,
+									delay: 0.1 
+								});
 
-
-          TweenLite.fromTo(slideStatusEl, 0.5,
-          {
-            autoAlpha: 1,
-            y: 0 },
-
-          {
-            autoAlpha: 0,
-            y: 20,
-            ease: 'Expo.easeIn',
-            onComplete: function () {
-              slideStatusEl.innerHTML = nextSlideStatus;
-
-              TweenLite.to(slideStatusEl, 0.5, {
-                autoAlpha: 1,
-                y: 0,
-                delay: 0.1 });
-
-            } });
-
-
+							}
+						}
+					);
         }
 
       });
@@ -243,6 +260,6 @@ imagesLoaded(document.querySelectorAll('img'), () => {
 		}
 	};
 
-	setInterval(doPaginationToggle, 5000);
+	setInterval(doPaginationToggle, 7000);
 });
 
