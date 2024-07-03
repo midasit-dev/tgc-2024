@@ -2,6 +2,7 @@
   "name": "tech-conference",
   "version": "0.1.0",
   "private": true,
+	"homepage": "https://midasit-dev.github.io/tgc-2024/tech-conference",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
